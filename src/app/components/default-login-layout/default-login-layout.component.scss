@@ -1,13 +1,12 @@
 @import "../../../styles/variables.scss";
 
-
 main {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   height: 100%;
-  
+
   section {
     height: 100%;
     display: flex;
@@ -15,28 +14,52 @@ main {
     align-items: center;
     justify-content: center;
   }
-  
+
   h1 {
     font-family: "Press Start 2P", system-ui;
     font-weight: normal;
-    font-size: 2.0em;
+    font-size: 2em;
+    text-align: center;
+
+    .below {
+      display: block;
+      font-family: inherit; // Garante que a fonte é a mesma
+      font-weight: inherit; // Garante que o peso da fonte é o mesmo
+      font-size: inherit; // Garante que o tamanho da fonte é o mesmo
+    }
   }
 
   .main-section {
-    gap: 8px;
-    
+    gap: 50px;
     flex-grow: 1;
     background-color: $primary-color;
+    font-size: 1.4em;
+
+    h1 {
+      font-family: "Press Start 2P", system-ui;
+      font-weight: normal;
+      font-size: 2em;
+      text-align: center;
+
+      .below {
+        display: block;
+        font-family: inherit;
+        font-weight: inherit;
+        font-size: inherit;
+      }
+    }
+
+   
   }
-  
+
   .catal-section {
     color: white;
   }
-  
+
   .form-section {
     flex-grow: 0.3;
     padding: 0 35px;
-    
+
     img {
       margin-bottom: 30px;
     }
@@ -48,7 +71,6 @@ main {
     }
 
     .btn-wrapper {
-      display: flex;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -87,13 +109,7 @@ main {
         &.btn-primary {
           background-color: $button-color;
           color: white;
-          box-shadow: 0px 8px 12px
-            rgba(
-              148.23004603385925,
-              64.33935597538948,
-              255,
-              0.20000000298023224
-            );
+          box-shadow: 0px 8px 12px rgba(148, 64, 255, 0.2);
         }
 
         &.btn-secundary {
