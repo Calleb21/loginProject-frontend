@@ -4,17 +4,23 @@
     <h2>{{ title }}</h2>
     <ng-content></ng-content>
     <div class="btn-wrapper">
-      <button class="btn-primary">{{ primaryBtnTxt }}</button>
+      <button class="btn-primary" (click)="submit()">
+        {{ primaryBtnTxt }}
+      </button>
       <div class="divider">
         <div></div>
         <span>OU</span>
         <div></div>
       </div>
-      <button class="btn-secundary">{{ secundaryBtnTxt }}</button>
+      <button class="btn-secundary" (click)="navigate()">{{ secundaryBtnTxt }}</button>
     </div>
   </section>
   <section class="main-section">
     <h1 class="catal-section">Catálogo de <span class="below">Peças</span></h1>
-    <img class="flag-fiat" src="/assets/svg/main-illustration.svg" alt="flag-fiat" />
+    <img
+      class="flag-fiat"
+      src="/assets/svg/main-illustration.svg"
+      alt="flag-fiat"
+    />
   </section>
 </main>

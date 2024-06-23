@@ -2,6 +2,8 @@
   title="Logar com sua conta"
   primaryBtnTxt="Entre Agora"
   secundaryBtnTxt="Cadastre-se Agora"
+  (submit)="submit()"
+  (navigate)="navigate()"
 >
   <form [formGroup]="loginForm">
     <app-primary-input
