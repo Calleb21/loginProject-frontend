@@ -4,7 +4,11 @@
     <h2>{{ title }}</h2>
     <ng-content></ng-content>
     <div class="btn-wrapper">
-      <button class="btn-primary" (click)="submit()" [disabled]="disablePrimaryBtn">
+      <button
+       class="btn-primary" 
+       (click)="submit()"
+        [disabled]="disablePrimaryBtn"
+        >
         {{ primaryBtnTxt }}
       </button>
       <div class="divider">

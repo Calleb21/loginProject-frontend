@@ -1,6 +1,7 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import {
   ControlValueAccessor,
+  FormGroup,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
@@ -45,7 +46,7 @@ export class PrimaryInputComponent implements ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {
-    this.onChange = fn;
+    this.onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {}
