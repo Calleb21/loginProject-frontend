@@ -22,3 +22,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.angular/cache/17.3.2/pizzaria-napolliBella-frontend/.tsbuildinfo
