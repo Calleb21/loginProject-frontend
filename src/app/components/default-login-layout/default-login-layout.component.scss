@@ -15,39 +15,12 @@ main {
     justify-content: center;
   }
 
-  h1 {
-    font-family: "Press Start 2P", system-ui;
-    font-weight: normal;
-    font-size: 2em;
-    text-align: center;
-
-    .below {
-      display: block;
-      font-family: inherit; // Garante que a fonte é a mesma
-      font-weight: inherit; // Garante que o peso da fonte é o mesmo
-      font-size: inherit; // Garante que o tamanho da fonte é o mesmo
-    }
-  }
 
   .main-section {
     gap: 50px;
     flex-grow: 1;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     font-size: 1.4em;
-
-    h1 {
-      font-family: "Press Start 2P", system-ui;
-      font-weight: normal;
-      font-size: 2em;
-      text-align: center;
-
-      .below {
-        display: block;
-        font-family: inherit;
-        font-weight: inherit;
-        font-size: inherit;
-      }
-    }
   }
 
   .catal-section {
@@ -60,6 +33,7 @@ main {
 
     img {
       margin-bottom: 30px;
+      align-items: center;
     }
 
     h2 {
