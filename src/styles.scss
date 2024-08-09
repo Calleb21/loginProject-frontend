@@ -11,3 +11,9 @@ html,
 body {
   height: 900px;
 }
+
+@media (max-width: 700px) {
+  form {
+    flex-direction: column; /* Muda a direção para vertical em telas menores */
+  }
+}
