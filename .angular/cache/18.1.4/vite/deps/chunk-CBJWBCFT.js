@@ -1,6 +1,6 @@
 import {
   DOCUMENT
-} from "./chunk-LTZKZ35U.js";
+} from "./chunk-ZZYNAIHW.js";
 import {
   ANIMATION_MODULE_TYPE,
   Inject,
@@ -12,7 +12,7 @@ import {
   setClassMetadata,
   ɵɵdefineInjectable,
   ɵɵinject
-} from "./chunk-XIKAJVJN.js";
+} from "./chunk-WYYIVEMK.js";
 
 // node_modules/@angular/animations/fesm2022/animations.mjs
 var AnimationMetadataType;
@@ -79,8 +79,8 @@ function transition(stateChangeExpr, steps, options = null) {
 }
 var _AnimationBuilder = class _AnimationBuilder {
 };
-_AnimationBuilder.ɵfac = function AnimationBuilder_Factory(t) {
-  return new (t || _AnimationBuilder)();
+_AnimationBuilder.ɵfac = function AnimationBuilder_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _AnimationBuilder)();
 };
 _AnimationBuilder.ɵprov = ɵɵdefineInjectable({
   token: _AnimationBuilder,
@@ -127,8 +127,8 @@ var _BrowserAnimationBuilder = class _BrowserAnimationBuilder extends AnimationB
     return new BrowserAnimationFactory(id, this._renderer);
   }
 };
-_BrowserAnimationBuilder.ɵfac = function BrowserAnimationBuilder_Factory(t) {
-  return new (t || _BrowserAnimationBuilder)(ɵɵinject(RendererFactory2), ɵɵinject(DOCUMENT));
+_BrowserAnimationBuilder.ɵfac = function BrowserAnimationBuilder_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _BrowserAnimationBuilder)(ɵɵinject(RendererFactory2), ɵɵinject(DOCUMENT));
 };
 _BrowserAnimationBuilder.ɵprov = ɵɵdefineInjectable({
   token: _BrowserAnimationBuilder,
@@ -474,9 +474,9 @@ export {
 
 @angular/animations/fesm2022/animations.mjs:
   (**
-   * @license Angular v17.3.2
-   * (c) 2010-2022 Google LLC. https://angular.io/
+   * @license Angular v18.1.4
+   * (c) 2010-2024 Google LLC. https://angular.io/
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-MVL5S4YO.js.map
+//# sourceMappingURL=chunk-CBJWBCFT.js.map

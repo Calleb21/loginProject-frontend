@@ -6,36 +6,34 @@ import {
   sequence,
   style,
   ɵPRE_STYLE
-} from "./chunk-MVL5S4YO.js";
+} from "./chunk-CBJWBCFT.js";
 import {
   BrowserModule,
   DomRendererFactory2
-} from "./chunk-6RQFJLQJ.js";
-import "./chunk-BUUFMITM.js";
+} from "./chunk-73GY7B4O.js";
+import "./chunk-GTW3PX4C.js";
 import {
   DOCUMENT
-} from "./chunk-LTZKZ35U.js";
+} from "./chunk-ZZYNAIHW.js";
 import {
   ANIMATION_MODULE_TYPE,
-  ChangeDetectionScheduler,
   Inject,
   Injectable,
   NgModule,
   NgZone,
   RendererFactory2,
   RuntimeError,
-  inject,
   performanceMarkFeature,
   setClassMetadata,
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-XIKAJVJN.js";
+} from "./chunk-WYYIVEMK.js";
 import {
   __objRest,
   __spreadValues
-} from "./chunk-SXIXOCJ4.js";
+} from "./chunk-YTR4LZ5T.js";
 
 // node_modules/@angular/animations/fesm2022/browser.mjs
 var LINE_START = "\n - ";
@@ -296,12 +294,6 @@ var _NoopAnimationDriver = class _NoopAnimationDriver {
     return validateStyleProperty(prop);
   }
   /**
-   * @deprecated unused
-   */
-  matchesElement(_element, _selector) {
-    return false;
-  }
-  /**
    *
    * @returns Whether elm1 contains elm2.
    */
@@ -334,8 +326,8 @@ var _NoopAnimationDriver = class _NoopAnimationDriver {
     return new NoopAnimationPlayer(duration, delay);
   }
 };
-_NoopAnimationDriver.ɵfac = function NoopAnimationDriver_Factory(t) {
-  return new (t || _NoopAnimationDriver)();
+_NoopAnimationDriver.ɵfac = function NoopAnimationDriver_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _NoopAnimationDriver)();
 };
 _NoopAnimationDriver.ɵprov = ɵɵdefineInjectable({
   token: _NoopAnimationDriver,
@@ -363,11 +355,9 @@ var NG_TRIGGER_SELECTOR = ".ng-trigger";
 var NG_ANIMATING_CLASSNAME = "ng-animating";
 var NG_ANIMATING_SELECTOR = ".ng-animating";
 function resolveTimingValue(value) {
-  if (typeof value == "number")
-    return value;
+  if (typeof value == "number") return value;
   const matches = value.match(/^(-?[\.\d]+)(m?s)/);
-  if (!matches || matches.length < 2)
-    return 0;
+  if (!matches || matches.length < 2) return 0;
   return _convertTimeValueToMS(parseFloat(matches[1]), matches[2]);
 }
 function _convertTimeValueToMS(value, unit) {
@@ -455,8 +445,7 @@ function eraseStyles(element, styles) {
 }
 function normalizeAnimationEntry(steps) {
   if (Array.isArray(steps)) {
-    if (steps.length == 1)
-      return steps[0];
+    if (steps.length == 1) return steps[0];
     return sequence(steps);
   }
   return steps;
@@ -878,8 +867,7 @@ var AnimationAstBuilderVisitor = class {
       startTime -= timings.duration + timings.delay;
     }
     ast.styles.forEach((tuple) => {
-      if (typeof tuple === "string")
-        return;
+      if (typeof tuple === "string") return;
       tuple.forEach((value, prop) => {
         if (typeof ngDevMode === "undefined" || ngDevMode) {
           if (!this._driver.validateStyleProperty(prop)) {
@@ -1055,8 +1043,7 @@ var AnimationAstBuilderContext = class {
   }
 };
 function consumeOffset(styles) {
-  if (typeof styles == "string")
-    return null;
+  if (typeof styles == "string") return null;
   let offset = null;
   if (Array.isArray(styles)) {
     styles.forEach((styleTuple) => {
@@ -1421,8 +1408,7 @@ var AnimationTimelineContext = class _AnimationTimelineContext {
     return this.options.params;
   }
   updateOptions(options, skipIfExists) {
-    if (!options)
-      return;
+    if (!options) return;
     const newOptions = options;
     let optionsToUpdate = this.options;
     if (newOptions.duration != null) {
@@ -1628,8 +1614,7 @@ var TimelineBuilder = class _TimelineBuilder {
     }
   }
   applyStylesToKeyframe() {
-    if (this._pendingStyles.size == 0)
-      return;
+    if (this._pendingStyles.size == 0) return;
     this._pendingStyles.forEach((val, prop) => {
       this._currentKeyframe.set(prop, val);
     });
@@ -2258,8 +2243,7 @@ var AnimationTransitionNamespace = class {
     let transition = trigger.matchTransition(fromState.value, toState.value, element, toState.params);
     let isFallbackTransition = false;
     if (!transition) {
-      if (!defaultToFallback)
-        return;
+      if (!defaultToFallback) return;
       transition = trigger.fallbackTransition;
       isFallbackTransition = true;
     }
@@ -2317,8 +2301,7 @@ var AnimationTransitionNamespace = class {
   _signalRemovalForInnerTriggers(rootElement, context) {
     const elements = this._engine.driver.query(rootElement, NG_TRIGGER_SELECTOR, true);
     elements.forEach((elm) => {
-      if (elm[REMOVAL_FLAG])
-        return;
+      if (elm[REMOVAL_FLAG]) return;
       const namespaces = this._engine.fetchNamespacesByElement(elm);
       if (namespaces.size) {
         namespaces.forEach((ns) => ns.triggerLeaveAnimation(elm, context, false, true));
@@ -2359,8 +2342,7 @@ var AnimationTransitionNamespace = class {
       const visitedTriggers = /* @__PURE__ */ new Set();
       listeners.forEach((listener) => {
         const triggerName = listener.name;
-        if (visitedTriggers.has(triggerName))
-          return;
+        if (visitedTriggers.has(triggerName)) return;
         visitedTriggers.add(triggerName);
         const trigger = this._triggers.get(triggerName);
         const transition = trigger.fallbackTransition;
@@ -2385,8 +2367,7 @@ var AnimationTransitionNamespace = class {
     if (element.childElementCount) {
       this._signalRemovalForInnerTriggers(element, context);
     }
-    if (this.triggerLeaveAnimation(element, context, true))
-      return;
+    if (this.triggerLeaveAnimation(element, context, true)) return;
     let containsPotentialParentTransition = false;
     if (engine.totalAnimations) {
       const currentPlayers = engine.players.length ? engine.playersByQueriedElement.get(element) : [];
@@ -2422,8 +2403,7 @@ var AnimationTransitionNamespace = class {
     const instructions = [];
     this._queue.forEach((entry) => {
       const player = entry.player;
-      if (player.destroyed)
-        return;
+      if (player.destroyed) return;
       const element = entry.element;
       const listeners = this._elementListeners.get(element);
       if (listeners) {
@@ -2463,11 +2443,10 @@ var TransitionAnimationEngine = class {
   _onRemovalComplete(element, context) {
     this.onRemovalComplete(element, context);
   }
-  constructor(bodyNode, driver, _normalizer, scheduler) {
+  constructor(bodyNode, driver, _normalizer) {
     this.bodyNode = bodyNode;
     this.driver = driver;
     this._normalizer = _normalizer;
-    this.scheduler = scheduler;
     this.players = [];
     this.newHostElements = /* @__PURE__ */ new Map();
     this.playersByElement = /* @__PURE__ */ new Map();
@@ -2547,8 +2526,7 @@ var TransitionAnimationEngine = class {
     }
   }
   destroy(namespaceId, context) {
-    if (!namespaceId)
-      return;
+    if (!namespaceId) return;
     this.afterFlush(() => {
     });
     this.afterFlushAnimationsDone(() => {
@@ -2591,8 +2569,7 @@ var TransitionAnimationEngine = class {
     return false;
   }
   insertNode(namespaceId, element, parent, insertBefore) {
-    if (!isElementNode(element))
-      return;
+    if (!isElementNode(element)) return;
     const details = element[REMOVAL_FLAG];
     if (details && details.setForRemoval) {
       details.setForRemoval = false;
@@ -2628,7 +2605,6 @@ var TransitionAnimationEngine = class {
   }
   removeNode(namespaceId, element, context) {
     if (isElementNode(element)) {
-      this.scheduler?.notify();
       const ns = namespaceId ? this._fetchNamespace(namespaceId) : null;
       if (ns) {
         ns.removeNode(element, context);
@@ -2666,8 +2642,7 @@ var TransitionAnimationEngine = class {
   destroyInnerAnimations(containerElement) {
     let elements = this.driver.query(containerElement, NG_TRIGGER_SELECTOR, true);
     elements.forEach((element) => this.destroyActiveAnimationsForElement(element));
-    if (this.playersByQueriedElement.size == 0)
-      return;
+    if (this.playersByQueriedElement.size == 0) return;
     elements = this.driver.query(containerElement, NG_ANIMATING_SELECTOR, true);
     elements.forEach((element) => this.finishActiveQueriedAnimationOnElement(element));
   }
@@ -3018,8 +2993,7 @@ var TransitionAnimationEngine = class {
       const element = allLeaveNodes[i2];
       const details = element[REMOVAL_FLAG];
       removeClass(element, LEAVE_CLASSNAME);
-      if (details && details.hasAnimation)
-        continue;
+      if (details && details.hasAnimation) continue;
       let players = [];
       if (queriedElements.size) {
         let queriedPlayerResults = queriedElements.get(element);
@@ -3071,20 +3045,16 @@ var TransitionAnimationEngine = class {
       if (elementPlayers) {
         const isRemovalAnimation = !toStateValue || toStateValue == VOID_VALUE;
         elementPlayers.forEach((player) => {
-          if (player.queued)
-            return;
-          if (!isRemovalAnimation && player.triggerName != triggerName)
-            return;
+          if (player.queued) return;
+          if (!isRemovalAnimation && player.triggerName != triggerName) return;
           players.push(player);
         });
       }
     }
     if (namespaceId || triggerName) {
       players = players.filter((player) => {
-        if (namespaceId && namespaceId != player.namespaceId)
-          return false;
-        if (triggerName && triggerName != player.triggerName)
-          return false;
+        if (namespaceId && namespaceId != player.namespaceId) return false;
+        if (triggerName && triggerName != player.triggerName) return false;
         return true;
       });
     }
@@ -3121,8 +3091,7 @@ var TransitionAnimationEngine = class {
       const element = timelineInstruction.element;
       allConsumedElements.add(element);
       const details = element[REMOVAL_FLAG];
-      if (details && details.removedBeforeQueried)
-        return new NoopAnimationPlayer(timelineInstruction.duration, timelineInstruction.delay);
+      if (details && details.removedBeforeQueried) return new NoopAnimationPlayer(timelineInstruction.duration, timelineInstruction.delay);
       const isQueriedElement = element !== rootElement;
       const previousPlayers = flattenGroupPlayers((allPreviousPlayersMap.get(element) || EMPTY_PLAYER_ARRAY).map((p) => p.getRealPlayer())).filter((p) => {
         const pp = p;
@@ -3180,8 +3149,7 @@ var TransitionAnimationPlayer = class {
     this.totalTime = 0;
   }
   setRealPlayer(player) {
-    if (this._containsRealPlayer)
-      return;
+    if (this._containsRealPlayer) return;
     this._player = player;
     this._queuedCallbacks.forEach((callbacks, phase) => {
       callbacks.forEach((callback) => listenOnPlayer(player, phase, void 0, callback));
@@ -3317,17 +3285,14 @@ function cloakAndComputeStyles(valuesMap, driver, elements, elementPropsMap, def
 function buildRootMap(roots, nodes) {
   const rootMap = /* @__PURE__ */ new Map();
   roots.forEach((root) => rootMap.set(root, []));
-  if (nodes.length == 0)
-    return rootMap;
+  if (nodes.length == 0) return rootMap;
   const NULL_NODE = 1;
   const nodeSet = new Set(nodes);
   const localRootMap = /* @__PURE__ */ new Map();
   function getRoot(node) {
-    if (!node)
-      return NULL_NODE;
+    if (!node) return NULL_NODE;
     let root = localRootMap.get(node);
-    if (root)
-      return root;
+    if (root) return root;
     const parent = node.parentNode;
     if (rootMap.has(parent)) {
       root = parent;
@@ -3374,19 +3339,16 @@ function _flattenGroupPlayersRecur(players, finalPlayers) {
 function objEquals(a, b) {
   const k1 = Object.keys(a);
   const k2 = Object.keys(b);
-  if (k1.length != k2.length)
-    return false;
+  if (k1.length != k2.length) return false;
   for (let i = 0; i < k1.length; i++) {
     const prop = k1[i];
-    if (!b.hasOwnProperty(prop) || a[prop] !== b[prop])
-      return false;
+    if (!b.hasOwnProperty(prop) || a[prop] !== b[prop]) return false;
   }
   return true;
 }
 function replacePostStylesAsPre(element, allPreStyleElements, allPostStyleElements) {
   const postEntry = allPostStyleElements.get(element);
-  if (!postEntry)
-    return false;
+  if (!postEntry) return false;
   let preEntry = allPreStyleElements.get(element);
   if (preEntry) {
     postEntry.forEach((data) => preEntry.add(data));
@@ -3397,13 +3359,13 @@ function replacePostStylesAsPre(element, allPreStyleElements, allPostStyleElemen
   return true;
 }
 var AnimationEngine = class {
-  constructor(doc, _driver, _normalizer, scheduler) {
+  constructor(doc, _driver, _normalizer) {
     this._driver = _driver;
     this._normalizer = _normalizer;
     this._triggerCache = {};
     this.onRemovalComplete = (element, context) => {
     };
-    this._transitionEngine = new TransitionAnimationEngine(doc.body, _driver, _normalizer, scheduler);
+    this._transitionEngine = new TransitionAnimationEngine(doc.body, _driver, _normalizer);
     this._timelineEngine = new TimelineAnimationEngine(doc.body, _driver, _normalizer);
     this._transitionEngine.onRemovalComplete = (element, context) => this.onRemovalComplete(element, context);
   }
@@ -3579,8 +3541,7 @@ var WebAnimationsPlayer = class {
     this._preparePlayerBeforeStart();
   }
   _buildPlayer() {
-    if (this._initialized)
-      return;
+    if (this._initialized) return;
     this._initialized = true;
     const keyframes = this.keyframes;
     this.domPlayer = this._triggerWebAnimation(this.element, keyframes, this.options);
@@ -3721,9 +3682,6 @@ var WebAnimationsDriver = class {
     }
     return true;
   }
-  matchesElement(_element, _selector) {
-    return false;
-  }
   containsElement(elm1, elm2) {
     return containsElement(elm1, elm2);
   }
@@ -3802,7 +3760,9 @@ var BaseAnimationRenderer = class {
     this.engine.onInsert(this.namespaceId, newChild, parent, isMove);
   }
   removeChild(parent, oldChild, isHostElement) {
-    this.engine.onRemove(this.namespaceId, oldChild, this.delegate);
+    if (this.parentNode(oldChild)) {
+      this.engine.onRemove(this.namespaceId, oldChild, this.delegate);
+    }
   }
   selectRootElement(selectorOrNode, preserveContent) {
     return this.delegate.selectRootElement(selectorOrNode, preserveContent);
@@ -3911,10 +3871,7 @@ var AnimationRendererFactory = class {
     this._rendererCache = /* @__PURE__ */ new Map();
     this._cdRecurDepth = 0;
     engine.onRemovalComplete = (element, delegate2) => {
-      const parentNode = delegate2?.parentNode(element);
-      if (parentNode) {
-        delegate2.removeChild(parentNode, element);
-      }
+      delegate2?.removeChild(null, element);
     };
   }
   createRenderer(hostElement, type) {
@@ -3999,16 +3956,14 @@ var _InjectableAnimationEngine = class _InjectableAnimationEngine extends Animat
   // Since the `ApplicationRef` should be created earlier before the `AnimationEngine`, they
   // both have `ngOnDestroy` hooks and `flush()` must be called after all views are destroyed.
   constructor(doc, driver, normalizer) {
-    super(doc, driver, normalizer, inject(ChangeDetectionScheduler, {
-      optional: true
-    }));
+    super(doc, driver, normalizer);
   }
   ngOnDestroy() {
     this.flush();
   }
 };
-_InjectableAnimationEngine.ɵfac = function InjectableAnimationEngine_Factory(t) {
-  return new (t || _InjectableAnimationEngine)(ɵɵinject(DOCUMENT), ɵɵinject(AnimationDriver), ɵɵinject(AnimationStyleNormalizer));
+_InjectableAnimationEngine.ɵfac = function InjectableAnimationEngine_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _InjectableAnimationEngine)(ɵɵinject(DOCUMENT), ɵɵinject(AnimationDriver), ɵɵinject(AnimationStyleNormalizer));
 };
 _InjectableAnimationEngine.ɵprov = ɵɵdefineInjectable({
   token: _InjectableAnimationEngine,
@@ -4085,8 +4040,8 @@ var _BrowserAnimationsModule = class _BrowserAnimationsModule {
     };
   }
 };
-_BrowserAnimationsModule.ɵfac = function BrowserAnimationsModule_Factory(t) {
-  return new (t || _BrowserAnimationsModule)();
+_BrowserAnimationsModule.ɵfac = function BrowserAnimationsModule_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _BrowserAnimationsModule)();
 };
 _BrowserAnimationsModule.ɵmod = ɵɵdefineNgModule({
   type: _BrowserAnimationsModule,
@@ -4112,8 +4067,8 @@ function provideAnimations() {
 }
 var _NoopAnimationsModule = class _NoopAnimationsModule {
 };
-_NoopAnimationsModule.ɵfac = function NoopAnimationsModule_Factory(t) {
-  return new (t || _NoopAnimationsModule)();
+_NoopAnimationsModule.ɵfac = function NoopAnimationsModule_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _NoopAnimationsModule)();
 };
 _NoopAnimationsModule.ɵmod = ɵɵdefineNgModule({
   type: _NoopAnimationsModule,
@@ -4148,15 +4103,15 @@ export {
 
 @angular/animations/fesm2022/browser.mjs:
   (**
-   * @license Angular v17.3.2
-   * (c) 2010-2022 Google LLC. https://angular.io/
+   * @license Angular v18.1.4
+   * (c) 2010-2024 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/platform-browser/fesm2022/animations.mjs:
   (**
-   * @license Angular v17.3.2
-   * (c) 2010-2022 Google LLC. https://angular.io/
+   * @license Angular v18.1.4
+   * (c) 2010-2024 Google LLC. https://angular.io/
    * License: MIT
    *)
 */

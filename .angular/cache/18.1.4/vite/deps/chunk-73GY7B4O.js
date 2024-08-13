@@ -1,6 +1,6 @@
 import {
   withHttpTransferCache
-} from "./chunk-BUUFMITM.js";
+} from "./chunk-GTW3PX4C.js";
 import {
   CommonModule,
   DOCUMENT,
@@ -11,7 +11,7 @@ import {
   isPlatformServer,
   parseCookieValue,
   setRootDomAdapter
-} from "./chunk-LTZKZ35U.js";
+} from "./chunk-ZZYNAIHW.js";
 import {
   APP_ID,
   ApplicationModule,
@@ -20,6 +20,7 @@ import {
   Console,
   ENVIRONMENT_INITIALIZER,
   ErrorHandler,
+  GLOBAL_EVENT_DELEGATION,
   INJECTOR_SCOPE,
   Inject,
   Injectable,
@@ -38,7 +39,6 @@ import {
   TESTABILITY_GETTER,
   Testability,
   TestabilityRegistry,
-  TransferState,
   Version,
   ViewEncapsulation$1,
   XSS_SECURITY_URL,
@@ -57,21 +57,22 @@ import {
   inject,
   internalCreateApplication,
   makeEnvironmentProviders,
-  makeStateKey,
   platformCore,
   setClassMetadata,
   setDocument,
   unwrapSafeValue,
   withDomHydration,
+  withEventReplay,
+  withI18nSupport,
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-XIKAJVJN.js";
+} from "./chunk-WYYIVEMK.js";
 import {
   __spreadProps,
   __spreadValues
-} from "./chunk-SXIXOCJ4.js";
+} from "./chunk-YTR4LZ5T.js";
 
 // node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs
 var GenericBrowserDomAdapter = class extends DomAdapter {
@@ -94,9 +95,7 @@ var BrowserDomAdapter = class _BrowserDomAdapter extends GenericBrowserDomAdapte
     el.dispatchEvent(evt);
   }
   remove(node) {
-    if (node.parentNode) {
-      node.parentNode.removeChild(node);
-    }
+    node.remove();
   }
   createElement(tagName, doc) {
     doc = doc || this.getDefaultDocument();
@@ -199,8 +198,8 @@ var _BrowserXhr = class _BrowserXhr {
     return new XMLHttpRequest();
   }
 };
-_BrowserXhr.ɵfac = function BrowserXhr_Factory(t) {
-  return new (t || _BrowserXhr)();
+_BrowserXhr.ɵfac = function BrowserXhr_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _BrowserXhr)();
 };
 _BrowserXhr.ɵprov = ɵɵdefineInjectable({
   token: _BrowserXhr,
@@ -259,8 +258,8 @@ var _EventManager = class _EventManager {
     return plugin;
   }
 };
-_EventManager.ɵfac = function EventManager_Factory(t) {
-  return new (t || _EventManager)(ɵɵinject(EVENT_MANAGER_PLUGINS), ɵɵinject(NgZone));
+_EventManager.ɵfac = function EventManager_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _EventManager)(ɵɵinject(EVENT_MANAGER_PLUGINS), ɵɵinject(NgZone));
 };
 _EventManager.ɵprov = ɵɵdefineInjectable({
   token: _EventManager,
@@ -416,8 +415,8 @@ var _SharedStylesHost = class _SharedStylesHost {
     hostNodes.add(this.doc.head);
   }
 };
-_SharedStylesHost.ɵfac = function SharedStylesHost_Factory(t) {
-  return new (t || _SharedStylesHost)(ɵɵinject(DOCUMENT), ɵɵinject(APP_ID), ɵɵinject(CSP_NONCE, 8), ɵɵinject(PLATFORM_ID));
+_SharedStylesHost.ɵfac = function SharedStylesHost_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _SharedStylesHost)(ɵɵinject(DOCUMENT), ɵɵinject(APP_ID), ɵɵinject(CSP_NONCE, 8), ɵɵinject(PLATFORM_ID));
 };
 _SharedStylesHost.ɵprov = ɵɵdefineInjectable({
   token: _SharedStylesHost,
@@ -461,7 +460,7 @@ var NAMESPACE_URIS = {
   "xlink": "http://www.w3.org/1999/xlink",
   "xml": "http://www.w3.org/XML/1998/namespace",
   "xmlns": "http://www.w3.org/2000/xmlns/",
-  "math": "http://www.w3.org/1998/MathML/"
+  "math": "http://www.w3.org/1998/Math/MathML"
 };
 var COMPONENT_REGEX = /%COMP%/g;
 var COMPONENT_VARIABLE = "%COMP%";
@@ -540,8 +539,8 @@ var _DomRendererFactory2 = class _DomRendererFactory2 {
     this.rendererByCompId.clear();
   }
 };
-_DomRendererFactory2.ɵfac = function DomRendererFactory2_Factory(t) {
-  return new (t || _DomRendererFactory2)(ɵɵinject(EventManager), ɵɵinject(SharedStylesHost), ɵɵinject(APP_ID), ɵɵinject(REMOVE_STYLES_ON_COMPONENT_DESTROY), ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID), ɵɵinject(NgZone), ɵɵinject(CSP_NONCE));
+_DomRendererFactory2.ɵfac = function DomRendererFactory2_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _DomRendererFactory2)(ɵɵinject(EventManager), ɵɵinject(SharedStylesHost), ɵɵinject(APP_ID), ɵɵinject(REMOVE_STYLES_ON_COMPONENT_DESTROY), ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID), ɵɵinject(NgZone), ɵɵinject(CSP_NONCE));
 };
 _DomRendererFactory2.ɵprov = ɵɵdefineInjectable({
   token: _DomRendererFactory2,
@@ -623,10 +622,8 @@ var DefaultDomRenderer2 = class {
       targetParent.insertBefore(newChild, refChild);
     }
   }
-  removeChild(parent, oldChild) {
-    if (parent) {
-      parent.removeChild(oldChild);
-    }
+  removeChild(_parent, oldChild) {
+    oldChild.remove();
   }
   selectRootElement(selectorOrNode, preserveContent) {
     let el = typeof selectorOrNode === "string" ? this.doc.querySelector(selectorOrNode) : selectorOrNode;
@@ -761,8 +758,8 @@ var ShadowDomRenderer = class extends DefaultDomRenderer2 {
   insertBefore(parent, newChild, refChild) {
     return super.insertBefore(this.nodeOrShadowRoot(parent), newChild, refChild);
   }
-  removeChild(parent, oldChild) {
-    return super.removeChild(this.nodeOrShadowRoot(parent), oldChild);
+  removeChild(_parent, oldChild) {
+    return super.removeChild(null, oldChild);
   }
   parentNode(node) {
     return this.nodeOrShadowRoot(super.parentNode(this.nodeOrShadowRoot(node)));
@@ -822,8 +819,8 @@ var _DomEventsPlugin = class _DomEventsPlugin extends EventManagerPlugin {
     return target.removeEventListener(eventName, callback);
   }
 };
-_DomEventsPlugin.ɵfac = function DomEventsPlugin_Factory(t) {
-  return new (t || _DomEventsPlugin)(ɵɵinject(DOCUMENT));
+_DomEventsPlugin.ɵfac = function DomEventsPlugin_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _DomEventsPlugin)(ɵɵinject(DOCUMENT));
 };
 _DomEventsPlugin.ɵprov = ɵɵdefineInjectable({
   token: _DomEventsPlugin,
@@ -832,6 +829,42 @@ _DomEventsPlugin.ɵprov = ɵɵdefineInjectable({
 var DomEventsPlugin = _DomEventsPlugin;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DomEventsPlugin, [{
+    type: Injectable
+  }], () => [{
+    type: void 0,
+    decorators: [{
+      type: Inject,
+      args: [DOCUMENT]
+    }]
+  }], null);
+})();
+var _EventDelegationPlugin = class _EventDelegationPlugin extends EventManagerPlugin {
+  constructor(doc) {
+    super(doc);
+    this.delegate = inject(GLOBAL_EVENT_DELEGATION, {
+      optional: true
+    });
+  }
+  supports(eventName) {
+    return this.delegate ? this.delegate.supports(eventName) : false;
+  }
+  addEventListener(element, eventName, handler) {
+    return this.delegate.addEventListener(element, eventName, handler);
+  }
+  removeEventListener(element, eventName, callback) {
+    return this.delegate.removeEventListener(element, eventName, callback);
+  }
+};
+_EventDelegationPlugin.ɵfac = function EventDelegationPlugin_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _EventDelegationPlugin)(ɵɵinject(DOCUMENT));
+};
+_EventDelegationPlugin.ɵprov = ɵɵdefineInjectable({
+  token: _EventDelegationPlugin,
+  factory: _EventDelegationPlugin.ɵfac
+});
+var EventDelegationPlugin = _EventDelegationPlugin;
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(EventDelegationPlugin, [{
     type: Injectable
   }], () => [{
     type: void 0,
@@ -949,8 +982,7 @@ var _KeyEventsPlugin = class _KeyEventsPlugin extends EventManagerPlugin {
       keycode = event.code;
       key = "code.";
     }
-    if (keycode == null || !keycode)
-      return false;
+    if (keycode == null || !keycode) return false;
     keycode = keycode.toLowerCase();
     if (keycode === " ") {
       keycode = "space";
@@ -987,8 +1019,8 @@ var _KeyEventsPlugin = class _KeyEventsPlugin extends EventManagerPlugin {
     return keyName === "esc" ? "escape" : keyName;
   }
 };
-_KeyEventsPlugin.ɵfac = function KeyEventsPlugin_Factory(t) {
-  return new (t || _KeyEventsPlugin)(ɵɵinject(DOCUMENT));
+_KeyEventsPlugin.ɵfac = function KeyEventsPlugin_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _KeyEventsPlugin)(ɵɵinject(DOCUMENT));
 };
 _KeyEventsPlugin.ɵprov = ɵɵdefineInjectable({
   token: _KeyEventsPlugin,
@@ -1078,6 +1110,10 @@ var BROWSER_MODULE_PROVIDERS = [{
   useClass: KeyEventsPlugin,
   multi: true,
   deps: [DOCUMENT]
+}, {
+  provide: EVENT_MANAGER_PLUGINS,
+  useClass: EventDelegationPlugin,
+  multi: true
 }, DomRendererFactory2, SharedStylesHost, EventManager, {
   provide: RendererFactory2,
   useExisting: DomRendererFactory2
@@ -1115,8 +1151,8 @@ var _BrowserModule = class _BrowserModule {
     };
   }
 };
-_BrowserModule.ɵfac = function BrowserModule_Factory(t) {
-  return new (t || _BrowserModule)(ɵɵinject(BROWSER_MODULE_PROVIDERS_MARKER, 12));
+_BrowserModule.ɵfac = function BrowserModule_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _BrowserModule)(ɵɵinject(BROWSER_MODULE_PROVIDERS_MARKER, 12));
 };
 _BrowserModule.ɵmod = ɵɵdefineNgModule({
   type: _BrowserModule,
@@ -1162,8 +1198,7 @@ var _Meta = class _Meta {
    * the new element if no match is found, or `null` if the tag parameter is not defined.
    */
   addTag(tag, forceCreation = false) {
-    if (!tag)
-      return null;
+    if (!tag) return null;
     return this._getOrCreateElement(tag, forceCreation);
   }
   /**
@@ -1175,8 +1210,7 @@ var _Meta = class _Meta {
    * @returns The matching elements if found, or the new elements.
    */
   addTags(tags, forceCreation = false) {
-    if (!tags)
-      return [];
+    if (!tags) return [];
     return tags.reduce((result, tag) => {
       if (tag) {
         result.push(this._getOrCreateElement(tag, forceCreation));
@@ -1191,8 +1225,7 @@ var _Meta = class _Meta {
    * @returns The matching element, if any.
    */
   getTag(attrSelector) {
-    if (!attrSelector)
-      return null;
+    if (!attrSelector) return null;
     return this._doc.querySelector(`meta[${attrSelector}]`) || null;
   }
   /**
@@ -1202,8 +1235,7 @@ var _Meta = class _Meta {
    * @returns The matching elements, if any.
    */
   getTags(attrSelector) {
-    if (!attrSelector)
-      return [];
+    if (!attrSelector) return [];
     const list = this._doc.querySelectorAll(`meta[${attrSelector}]`);
     return list ? [].slice.call(list) : [];
   }
@@ -1217,8 +1249,7 @@ var _Meta = class _Meta {
    * @return The modified element.
    */
   updateTag(tag, selector) {
-    if (!tag)
-      return null;
+    if (!tag) return null;
     selector = selector || this._parseSelector(tag);
     const meta = this.getTag(selector);
     if (meta) {
@@ -1247,8 +1278,7 @@ var _Meta = class _Meta {
     if (!forceCreation) {
       const selector = this._parseSelector(meta);
       const elem = this.getTags(selector).filter((elem2) => this._containsAttributes(meta, elem2))[0];
-      if (elem !== void 0)
-        return elem;
+      if (elem !== void 0) return elem;
     }
     const element = this._dom.createElement("meta");
     this._setMetaElementAttributes(meta, element);
@@ -1271,8 +1301,8 @@ var _Meta = class _Meta {
     return META_KEYS_MAP[prop] || prop;
   }
 };
-_Meta.ɵfac = function Meta_Factory(t) {
-  return new (t || _Meta)(ɵɵinject(DOCUMENT));
+_Meta.ɵfac = function Meta_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _Meta)(ɵɵinject(DOCUMENT));
 };
 _Meta.ɵprov = ɵɵdefineInjectable({
   token: _Meta,
@@ -1315,8 +1345,8 @@ var _Title = class _Title {
     this._doc.title = newTitle || "";
   }
 };
-_Title.ɵfac = function Title_Factory(t) {
-  return new (t || _Title)(ɵɵinject(DOCUMENT));
+_Title.ɵfac = function Title_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _Title)(ɵɵinject(DOCUMENT));
 };
 _Title.ɵprov = ɵɵdefineInjectable({
   token: _Title,
@@ -1509,8 +1539,8 @@ var _HammerGestureConfig = class _HammerGestureConfig {
     return mc;
   }
 };
-_HammerGestureConfig.ɵfac = function HammerGestureConfig_Factory(t) {
-  return new (t || _HammerGestureConfig)();
+_HammerGestureConfig.ɵfac = function HammerGestureConfig_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _HammerGestureConfig)();
 };
 _HammerGestureConfig.ɵprov = ɵɵdefineInjectable({
   token: _HammerGestureConfig,
@@ -1594,8 +1624,8 @@ var _HammerGesturesPlugin = class _HammerGesturesPlugin extends EventManagerPlug
     return this._config.events.indexOf(eventName) > -1;
   }
 };
-_HammerGesturesPlugin.ɵfac = function HammerGesturesPlugin_Factory(t) {
-  return new (t || _HammerGesturesPlugin)(ɵɵinject(DOCUMENT), ɵɵinject(HAMMER_GESTURE_CONFIG), ɵɵinject(Console), ɵɵinject(HAMMER_LOADER, 8));
+_HammerGesturesPlugin.ɵfac = function HammerGesturesPlugin_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _HammerGesturesPlugin)(ɵɵinject(DOCUMENT), ɵɵinject(HAMMER_GESTURE_CONFIG), ɵɵinject(Console), ɵɵinject(HAMMER_LOADER, 8));
 };
 _HammerGesturesPlugin.ɵprov = ɵɵdefineInjectable({
   token: _HammerGesturesPlugin,
@@ -1631,8 +1661,8 @@ var HammerGesturesPlugin = _HammerGesturesPlugin;
 })();
 var _HammerModule = class _HammerModule {
 };
-_HammerModule.ɵfac = function HammerModule_Factory(t) {
-  return new (t || _HammerModule)();
+_HammerModule.ɵfac = function HammerModule_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _HammerModule)();
 };
 _HammerModule.ɵmod = ɵɵdefineNgModule({
   type: _HammerModule
@@ -1669,19 +1699,19 @@ var HammerModule = _HammerModule;
 })();
 var _DomSanitizer = class _DomSanitizer {
 };
-_DomSanitizer.ɵfac = function DomSanitizer_Factory(t) {
-  return new (t || _DomSanitizer)();
+_DomSanitizer.ɵfac = function DomSanitizer_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _DomSanitizer)();
 };
 _DomSanitizer.ɵprov = ɵɵdefineInjectable({
   token: _DomSanitizer,
-  factory: function DomSanitizer_Factory(t) {
-    let r = null;
-    if (t) {
-      r = new (t || _DomSanitizer)();
+  factory: function DomSanitizer_Factory(__ngFactoryType__) {
+    let __ngConditionalFactory__ = null;
+    if (__ngFactoryType__) {
+      __ngConditionalFactory__ = new (__ngFactoryType__ || _DomSanitizer)();
     } else {
-      r = ɵɵinject(DomSanitizerImpl);
+      __ngConditionalFactory__ = ɵɵinject(DomSanitizerImpl);
     }
-    return r;
+    return __ngConditionalFactory__;
   },
   providedIn: "root"
 });
@@ -1701,8 +1731,7 @@ var _DomSanitizerImpl = class _DomSanitizerImpl extends DomSanitizer {
     this._doc = _doc;
   }
   sanitize(ctx, value) {
-    if (value == null)
-      return null;
+    if (value == null) return null;
     switch (ctx) {
       case SecurityContext.NONE:
         return value;
@@ -1771,8 +1800,8 @@ var _DomSanitizerImpl = class _DomSanitizerImpl extends DomSanitizer {
     return bypassSanitizationTrustResourceUrl(value);
   }
 };
-_DomSanitizerImpl.ɵfac = function DomSanitizerImpl_Factory(t) {
-  return new (t || _DomSanitizerImpl)(ɵɵinject(DOCUMENT));
+_DomSanitizerImpl.ɵfac = function DomSanitizerImpl_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _DomSanitizerImpl)(ɵɵinject(DOCUMENT));
 };
 _DomSanitizerImpl.ɵprov = ɵɵdefineInjectable({
   token: _DomSanitizerImpl,
@@ -1798,6 +1827,8 @@ var HydrationFeatureKind;
 (function(HydrationFeatureKind2) {
   HydrationFeatureKind2[HydrationFeatureKind2["NoHttpTransferCache"] = 0] = "NoHttpTransferCache";
   HydrationFeatureKind2[HydrationFeatureKind2["HttpTransferCacheOptions"] = 1] = "HttpTransferCacheOptions";
+  HydrationFeatureKind2[HydrationFeatureKind2["I18nSupport"] = 2] = "I18nSupport";
+  HydrationFeatureKind2[HydrationFeatureKind2["EventReplay"] = 3] = "EventReplay";
 })(HydrationFeatureKind || (HydrationFeatureKind = {}));
 function hydrationFeature(ɵkind, ɵproviders = [], ɵoptions = {}) {
   return {
@@ -1810,6 +1841,12 @@ function withNoHttpTransferCache() {
 }
 function withHttpTransferCacheOptions(options) {
   return hydrationFeature(HydrationFeatureKind.HttpTransferCacheOptions, withHttpTransferCache(options));
+}
+function withI18nSupport2() {
+  return hydrationFeature(HydrationFeatureKind.I18nSupport, withI18nSupport());
+}
+function withEventReplay2() {
+  return hydrationFeature(HydrationFeatureKind.EventReplay, withEventReplay());
 }
 function provideZoneJsCompatibilityDetector() {
   return [{
@@ -1843,9 +1880,7 @@ function provideClientHydration(...features) {
   }
   return makeEnvironmentProviders([typeof ngDevMode !== "undefined" && ngDevMode ? provideZoneJsCompatibilityDetector() : [], withDomHydration(), featuresKind.has(HydrationFeatureKind.NoHttpTransferCache) || hasHttpTransferCacheOptions ? [] : withHttpTransferCache({}), providers]);
 }
-var VERSION = new Version("17.3.2");
-var makeStateKey2 = makeStateKey;
-var TransferState2 = TransferState;
+var VERSION = new Version("18.1.4");
 
 export {
   BrowserDomAdapter,
@@ -1880,18 +1915,18 @@ export {
   HydrationFeatureKind,
   withNoHttpTransferCache,
   withHttpTransferCacheOptions,
+  withI18nSupport2 as withI18nSupport,
+  withEventReplay2 as withEventReplay,
   provideClientHydration,
-  VERSION,
-  makeStateKey2 as makeStateKey,
-  TransferState2 as TransferState
+  VERSION
 };
 /*! Bundled license information:
 
 @angular/platform-browser/fesm2022/platform-browser.mjs:
   (**
-   * @license Angular v17.3.2
-   * (c) 2010-2022 Google LLC. https://angular.io/
+   * @license Angular v18.1.4
+   * (c) 2010-2024 Google LLC. https://angular.io/
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-6RQFJLQJ.js.map
+//# sourceMappingURL=chunk-73GY7B4O.js.map

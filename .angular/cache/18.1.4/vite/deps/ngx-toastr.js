@@ -4,15 +4,15 @@ import {
   style,
   transition,
   trigger
-} from "./chunk-MVL5S4YO.js";
+} from "./chunk-CBJWBCFT.js";
 import {
   DomSanitizer
-} from "./chunk-6RQFJLQJ.js";
-import "./chunk-BUUFMITM.js";
+} from "./chunk-73GY7B4O.js";
+import "./chunk-GTW3PX4C.js";
 import {
   DOCUMENT,
   NgIf
-} from "./chunk-LTZKZ35U.js";
+} from "./chunk-ZZYNAIHW.js";
 import {
   ApplicationRef,
   ChangeDetectionStrategy,
@@ -61,12 +61,12 @@ import {
   ɵɵtemplate,
   ɵɵtext,
   ɵɵtextInterpolate1
-} from "./chunk-XIKAJVJN.js";
+} from "./chunk-WYYIVEMK.js";
 import {
   Subject,
   __spreadProps,
   __spreadValues
-} from "./chunk-SXIXOCJ4.js";
+} from "./chunk-YTR4LZ5T.js";
 
 // node_modules/ngx-toastr/fesm2022/ngx-toastr.mjs
 var _c0 = ["toast-component", ""];
@@ -236,8 +236,8 @@ var ToastContainerDirective = class _ToastContainerDirective {
   getContainerElement() {
     return this.el.nativeElement;
   }
-  static ɵfac = function ToastContainerDirective_Factory(t) {
-    return new (t || _ToastContainerDirective)(ɵɵdirectiveInject(ElementRef));
+  static ɵfac = function ToastContainerDirective_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ToastContainerDirective)(ɵɵdirectiveInject(ElementRef));
   };
   static ɵdir = ɵɵdefineDirective({
     type: _ToastContainerDirective,
@@ -530,8 +530,8 @@ var OverlayContainer = class _OverlayContainer {
     this._document.body.appendChild(container);
     this._containerElement = container;
   }
-  static ɵfac = function OverlayContainer_Factory(t) {
-    return new (t || _OverlayContainer)();
+  static ɵfac = function OverlayContainer_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _OverlayContainer)();
   };
   static ɵprov = ɵɵdefineInjectable({
     token: _OverlayContainer,
@@ -617,8 +617,8 @@ var Overlay = class _Overlay {
   _createOverlayRef(pane) {
     return new OverlayRef(this._createPortalHost(pane));
   }
-  static ɵfac = function Overlay_Factory(t) {
-    return new (t || _Overlay)();
+  static ɵfac = function Overlay_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _Overlay)();
   };
   static ɵprov = ɵɵdefineInjectable({
     token: _Overlay,
@@ -819,8 +819,8 @@ var ToastrService = class _ToastrService {
     this.toasts.push(ins);
     return ins;
   }
-  static ɵfac = function ToastrService_Factory(t) {
-    return new (t || _ToastrService)(ɵɵinject(TOAST_CONFIG), ɵɵinject(Overlay), ɵɵinject(Injector), ɵɵinject(DomSanitizer), ɵɵinject(NgZone));
+  static ɵfac = function ToastrService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ToastrService)(ɵɵinject(TOAST_CONFIG), ɵɵinject(Overlay), ɵɵinject(Injector), ɵɵinject(DomSanitizer), ɵɵinject(NgZone));
   };
   static ɵprov = ɵɵdefineInjectable({
     token: _ToastrService,
@@ -1035,8 +1035,8 @@ var Toast = class _Toast {
       func();
     }
   }
-  static ɵfac = function Toast_Factory(t) {
-    return new (t || _Toast)(ɵɵdirectiveInject(ToastrService), ɵɵdirectiveInject(ToastPackage), ɵɵdirectiveInject(NgZone));
+  static ɵfac = function Toast_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _Toast)(ɵɵdirectiveInject(ToastrService), ɵɵdirectiveInject(ToastPackage), ɵɵdirectiveInject(NgZone));
   };
   static ɵcmp = ɵɵdefineComponent({
     type: _Toast,
@@ -1182,8 +1182,8 @@ var ToastrModule = class _ToastrModule {
       providers: [provideToastr(config)]
     };
   }
-  static ɵfac = function ToastrModule_Factory(t) {
-    return new (t || _ToastrModule)();
+  static ɵfac = function ToastrModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ToastrModule)();
   };
   static ɵmod = ɵɵdefineNgModule({
     type: _ToastrModule,
@@ -1214,8 +1214,8 @@ var ToastrComponentlessModule = class _ToastrComponentlessModule {
       }]
     };
   }
-  static ɵfac = function ToastrComponentlessModule_Factory(t) {
-    return new (t || _ToastrComponentlessModule)();
+  static ɵfac = function ToastrComponentlessModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ToastrComponentlessModule)();
   };
   static ɵmod = ɵɵdefineNgModule({
     type: _ToastrComponentlessModule
@@ -1379,8 +1379,8 @@ var ToastNoAnimation = class _ToastNoAnimation {
       this.intervalId = setInterval(() => this.updateProgress(), 10);
     }
   }
-  static ɵfac = function ToastNoAnimation_Factory(t) {
-    return new (t || _ToastNoAnimation)(ɵɵdirectiveInject(ToastrService), ɵɵdirectiveInject(ToastPackage), ɵɵdirectiveInject(ApplicationRef));
+  static ɵfac = function ToastNoAnimation_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ToastNoAnimation)(ɵɵdirectiveInject(ToastrService), ɵɵdirectiveInject(ToastPackage), ɵɵdirectiveInject(ApplicationRef));
   };
   static ɵcmp = ɵɵdefineComponent({
     type: _ToastNoAnimation,
@@ -1500,8 +1500,8 @@ var ToastNoAnimationModule = class _ToastNoAnimationModule {
       }]
     };
   }
-  static ɵfac = function ToastNoAnimationModule_Factory(t) {
-    return new (t || _ToastNoAnimationModule)();
+  static ɵfac = function ToastNoAnimationModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ToastNoAnimationModule)();
   };
   static ɵmod = ɵɵdefineNgModule({
     type: _ToastNoAnimationModule,
