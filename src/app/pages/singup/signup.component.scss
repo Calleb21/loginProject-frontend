@@ -13,4 +13,30 @@ form {
     color: $secondary-color;
     text-align: end;
   }
+
+  .input-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .tooltip {
+    display: none;
+    position: absolute;
+    background-color: darken($primary-color, 10%); 
+    color: #fff;
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 12px;
+    bottom: -35px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .input-wrapper:hover .tooltip {
+    display: block;
+  }
+  
 }

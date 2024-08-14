@@ -4,8 +4,8 @@ import {
   FormGroup,
   ReactiveFormsModule,
   Validators,
-  AbstractControl,  // Importe aqui
-  ValidationErrors, // E aqui
+  AbstractControl,  
+  ValidationErrors, 
 } from '@angular/forms';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
