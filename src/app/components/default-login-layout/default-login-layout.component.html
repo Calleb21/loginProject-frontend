@@ -5,10 +5,10 @@
     <ng-content></ng-content>
     <div class="btn-wrapper">
       <button
-       class="btn-primary" 
-       (click)="submit()"
+        class="btn-primary"
+        (click)="submit()"
         [disabled]="disablePrimaryBtn"
-        >
+      >
         {{ primaryBtnTxt }}
       </button>
       <div class="divider">
@@ -16,7 +16,9 @@
         <span>OU</span>
         <div></div>
       </div>
-      <button class="btn-secundary" (click)="navigate()">{{ secundaryBtnTxt }}</button>
+      <button class="btn-secundary" (click)="navigate()">
+        {{ secundaryBtnTxt }}
+      </button>
     </div>
   </section>
   <section class="main-section">

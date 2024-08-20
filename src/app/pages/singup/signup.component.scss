@@ -18,11 +18,11 @@ form {
     position: relative;
     margin-bottom: 20px;
   }
-  
+
   .tooltip {
     display: none;
     position: absolute;
-    background-color: darken($primary-color, 10%); 
+    background-color: $primary-color;
     color: #fff;
     padding: 5px;
     border-radius: 8px;
@@ -34,7 +34,7 @@ form {
     white-space: nowrap;
     box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
   }
-  
+
   .input-wrapper:hover .tooltip {
     display: block;
   }

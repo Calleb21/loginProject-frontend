@@ -1,18 +1,17 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
-  AbstractControl,  
-  ValidationErrors, 
-} from '@angular/forms';
-import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
-import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
-import { Router } from '@angular/router';
-import { LoginService } from '../../services/login.service';
-import { ToastrService } from 'ngx-toastr';
-
+  AbstractControl,
+  ValidationErrors,
+} from "@angular/forms";
+import { DefaultLoginLayoutComponent } from "../../components/default-login-layout/default-login-layout.component";
+import { PrimaryInputComponent } from "../../components/primary-input/primary-input.component";
+import { Router } from "@angular/router";
+import { LoginService } from "../../services/login.service";
+import { ToastrService } from "ngx-toastr";
 
 interface LoginForm {
   email: FormControl;
@@ -20,7 +19,7 @@ interface LoginForm {
 }
 
 @Component({
-  selector: 'app-login',
+  selector: "app-login",
   standalone: true,
   imports: [
     DefaultLoginLayoutComponent,
@@ -28,8 +27,8 @@ interface LoginForm {
     PrimaryInputComponent,
   ],
   providers: [LoginService],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent {
   loginForm!: FormGroup<LoginForm>;
@@ -40,8 +39,8 @@ export class LoginComponent {
     private toastService: ToastrService
   ) {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [
+      email: new FormControl("", [Validators.required, Validators.email]),
+      password: new FormControl("", [
         Validators.required,
         this.customPasswordValidator(),
       ]),
@@ -51,43 +50,45 @@ export class LoginComponent {
   submit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.loginService
-        .login(email, password)
-        .subscribe({
-          next: () => this.toastService.success('Login feito com sucesso!'),
-          error: () =>
-            this.toastService.error(
-              'Erro inesperado! Tente novamente mais tarde'
-            ),
-        });
+      this.loginService.login(email, password).subscribe({
+        next: () => this.toastService.success("Login feito com sucesso!"),
+        error: () =>
+          this.toastService.error(
+            "Erro inesperado! Tente novamente mais tarde"
+          ),
+      });
     }
   }
 
   navigate() {
-    this.router.navigate(['signup']);
+    this.router.navigate(["signup"]);
   }
 
-  // Custom password validator function
   private customPasswordValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const password = control.value;
-      if (password.length !== 11) {
-        return { passwordLength: 'Password must be exactly 11 characters long' };
-      }
 
+      if (password.length < 11 || password.length > 15) {
+        return {
+          passwordLength: "Password must be between 11 and 15 characters long",
+        };
+      }
       if (!/[A-Z]/.test(password)) {
-        return { uppercaseLetter: 'Password must contain at least one uppercase letter' };
+        return {
+          uppercaseLetter:
+            "Password must contain at least one uppercase letter",
+        };
       }
-
       if (!/[0-9]/.test(password)) {
-        return { number: 'Password must contain at least one number' };
+        return { number: "Password must contain at least one number" };
       }
-
       if (!/[!@#$%^&*]/.test(password)) {
-        return { specialCharacter: 'Password must contain at least one special character' };
+        return {
+          specialCharacter:
+            "Password must contain at least one special character",
+        };
       }
-
-      return null;  // Password is valid
+      return null; // Password is valid
     };
   }
 }

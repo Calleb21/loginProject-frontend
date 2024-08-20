@@ -1,15 +1,15 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from "@angular/core";
 import {
   ControlValueAccessor,
   FormGroup,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
-} from '@angular/forms';
+} from "@angular/forms";
 
-type InputTypes = 'text' | 'email' | 'password';
+type InputTypes = "text" | "email" | "password";
 
 @Component({
-  selector: 'app-primary-input',
+  selector: "app-primary-input",
   standalone: true,
   imports: [ReactiveFormsModule],
   providers: [
@@ -19,16 +19,16 @@ type InputTypes = 'text' | 'email' | 'password';
       multi: true,
     },
   ],
-  templateUrl: './primary-input.component.html',
-  styleUrl: './primary-input.component.scss',
+  templateUrl: "./primary-input.component.html",
+  styleUrl: "./primary-input.component.scss",
 })
 export class PrimaryInputComponent implements ControlValueAccessor {
-  @Input() type: InputTypes = 'text';
-  @Input() placeholder: string = '';
-  @Input() label: string = '';
-  @Input() inputName: string = '';
+  @Input() type: InputTypes = "text";
+  @Input() placeholder: string = "";
+  @Input() label: string = "";
+  @Input() inputName: string = "";
 
-  value: string = '';
+  value: string = "";
   onChange: any = () => {};
   onTouched: any = () => {};
 
