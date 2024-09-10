@@ -1,27 +1,45 @@
-# PizzariaNapolliBellaFrontend
+<h1 align="center" style="font-weight: bold;">Projeto Login e Cadastro Frontend com Angular 💻</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+<h2 id="started">📌 Sobre</h2>
 
-## Development server
+Este projeto foi criado com o intuito de colocar em prática alguns conhecimentos de frontend adquiridos durantes cursos e artigos. O projeto é baseado em um já existente (https://www.youtube.com/watch?v=6qbuuPM_de4), porém com algumas modificações de visualização e adição de mais funcionalidades.
+O projeto conta com três rotas, sendo uma de login, cadastro e redefinição de senha:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+A tela de Login "Entre com sua conta", trem presente as seguintes funcionalidades:
 
-## Code scaffolding
+Campo para preenchimento do Endereço de Email;
+Campo para preenchimento da Senha;
+Botão "Esqueceu a senha?", redireciona o usuário para tela de redefinição de senha;
+Botão "Entre Agora", redireciona o usuário para página no qual contém o conteúdo main que poderá ser desenvolvido futuramente;
+Botão "Cadastre-se Agora", redireciona o usuário para tela de Cadastro;
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+<h2 id="started">🚀 Utilizados</h2>
 
-## Running unit tests
+<h3>Pré-requisitos</h3>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- [NodeJS](https://github.com/)
+- [Git 2](https://github.com)
+- [Angular CLI](https://angular.io/cli)
 
-## Running end-to-end tests
+<h3>Para clonar</h3>
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+https://github.com/Calleb21/loginProject-frontend.git
+```
 
-## Further help
+<h3>Para Iniciar</h3>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+cd project-name
+npm run start
+```
+
+<h2 id="routes">📍 Rotas da aplicação</h2>
+​
+| rotas               | descrição                                          
+|----------------------|-----------------------------------------------------
+| <kbd>/signup</kbd>     | Page to sign up
+| <kbd>/login</kbd>     | Page to login
+| <kbd>/user</kbd>     | Protected page that only logged in users can access
