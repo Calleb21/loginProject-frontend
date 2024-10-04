@@ -80,5 +80,10 @@ npm run start
 Para mais informações ou sugestões, sinta-se à vontade para entrar em contato:
 
 - **Email:** camargocalleb12@gmail.com
+<<<<<<< HEAD
 - **LinkedIn:** [Seu LinkedIn](linkedin.com/in/calleb-camargo-682321237)
 - **GitHub:** [Seu GitHub](github.com/Calleb21)
+=======
+- **LinkedIn:** [Seu LinkedIn](https://linkedin.com/in/calleb-camargo-682321237)
+- **GitHub:** [Seu GitHub](https://github.com/Calleb21)
+>>>>>>> 459b04e83ec50b971a960e4926ac9bfee4be7279
