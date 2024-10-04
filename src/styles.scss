@@ -5,10 +5,15 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  
 }
 
 html,
 body {
   height: 975px;
+}
+
+@media (min-width: 1080px) {
+  html, body {
+   height: 1200px;
+  }
 }
