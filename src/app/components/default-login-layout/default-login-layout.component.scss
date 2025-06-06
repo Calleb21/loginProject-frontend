@@ -3,23 +3,29 @@
 main {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+  /* Remove align-items: center; Let sections handle their alignment */
+  justify-content: center; /* Horizontally center the sections */
+  min-height: 100vh; /* Ensure main takes at least full viewport height */
+  width: 100%;
 
   section {
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /* Remove align-self: stretch; */
   }
 
   .main-section {
     gap: 50px;
-    flex-grow: 1;
     background: linear-gradient(to bottom, #020838, #000000);
     font-size: 1.4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    flex: 1;
+    /* Remove height: 100vh; */
+    align-self: stretch; /* Stretch to fill main's height */
   }
 
   .catal-section {
@@ -27,18 +33,48 @@ main {
   }
 
   .form-section {
-    flex-grow: 0.3;
-    padding: 0 35px;
+    padding: 40px 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content vertically within the form section */
+    width: 40%;
+    max-width: 500px;
+    /* Remove height: 100vh; */
+    /* Remove align-self: stretch; Let its own content define height */
+    /* Add margin auto vertically to center the block if main has space */
+    margin-top: auto;
+    margin-bottom: auto;
 
     img {
       margin-bottom: 30px;
-      align-items: center;
+      /* margin-top: auto; Remove this, let justify-content handle */
     }
 
     h2 {
       font-size: 20px;
       font-weight: bold;
       margin-bottom: 45px;
+      /* margin-top: 15px; Remove this */
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .botao-esqueceu-senha {
+      font-size: 14px;
+      text-decoration: underline;
+      color: $password-color;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      margin-bottom: 30px;
     }
 
     .btn-wrapper {
@@ -48,6 +84,8 @@ main {
       justify-content: center;
       width: 100%;
       gap: 30px;
+      /* margin-top: auto; Remove this */
+      /* padding-bottom: 40px; Remove this */
 
       .divider {
         display: flex;
@@ -95,3 +133,4 @@ main {
     }
   }
 }
+

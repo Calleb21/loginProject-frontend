@@ -9,11 +9,12 @@
 
 html,
 body {
-  height: 975px;
+  /* Basic setup, allow JS to control specifics per route */
+  width: 100%;
+  /* min-height: 100vh; Let JS handle height for login centering */
 }
 
-@media (min-width: 1080px) {
-  html, body {
-   height: 1200px;
-  }
-}
+/* Remove body.no-scroll rules as JS handles styles directly */
+/* body.no-scroll {
+  overflow: hidden;
+} */
