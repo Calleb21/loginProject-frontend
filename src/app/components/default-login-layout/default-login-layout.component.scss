@@ -3,16 +3,15 @@
 main {
   display: flex;
   flex-direction: row;
-  /* Remove align-items: center; Let sections handle their alignment */
   justify-content: center; /* Horizontally center the sections */
   min-height: 100vh; /* Ensure main takes at least full viewport height */
   width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 
   section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Remove align-self: stretch; */
   }
 
   .main-section {
@@ -24,7 +23,6 @@ main {
     justify-content: center;
     padding: 40px;
     flex: 1;
-    /* Remove height: 100vh; */
     align-self: stretch; /* Stretch to fill main's height */
   }
 
@@ -40,22 +38,20 @@ main {
     justify-content: center; /* Center content vertically within the form section */
     width: 40%;
     max-width: 500px;
-    /* Remove height: 100vh; */
-    /* Remove align-self: stretch; Let its own content define height */
-    /* Add margin auto vertically to center the block if main has space */
     margin-top: auto;
     margin-bottom: auto;
 
     img {
       margin-bottom: 30px;
-      /* margin-top: auto; Remove this, let justify-content handle */
+      max-width: 100%; /* Ensure image is responsive */
+      height: auto;
     }
 
     h2 {
       font-size: 20px;
       font-weight: bold;
       margin-bottom: 45px;
-      /* margin-top: 15px; Remove this */
+      text-align: center; /* Center text for better mobile appearance */
     }
 
     form {
@@ -75,6 +71,7 @@ main {
       padding: 0;
       cursor: pointer;
       margin-bottom: 30px;
+      text-align: center; /* Center text for better mobile appearance */
     }
 
     .btn-wrapper {
@@ -84,8 +81,6 @@ main {
       justify-content: center;
       width: 100%;
       gap: 30px;
-      /* margin-top: auto; Remove this */
-      /* padding-bottom: 40px; Remove this */
 
       .divider {
         display: flex;
@@ -132,5 +127,47 @@ main {
       }
     }
   }
-}
 
+  /* Media queries for responsive design */
+  @media (max-width: 1024px) {
+    .form-section {
+      width: 50%; /* Slightly wider form on medium screens */
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack sections vertically on smaller screens */
+    
+    .form-section {
+      width: 100%; /* Full width form on small screens */
+      max-width: 100%;
+      order: 1; /* Show form first */
+      padding: 30px 20px;
+    }
+    
+    .main-section {
+      order: 2; /* Show image section second */
+      min-height: 300px; /* Ensure image section has reasonable height */
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .form-section {
+      padding: 20px 15px;
+      
+      h2 {
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
+      
+      .btn-wrapper {
+        gap: 20px;
+      }
+    }
+    
+    .main-section {
+      min-height: 200px;
+    }
+  }
+}
