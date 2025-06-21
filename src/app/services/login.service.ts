@@ -1,17 +1,20 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { LoginResponse } from "../types/login-response.type";
+import { LoginRequest } from "../models/login-request.model"; // Importar a nova interface
 import { tap } from "rxjs";
 
 @Injectable({
   providedIn: "root",
-})
+} )
 export class LoginService {
-  constructor(private httpClient: HttpClient) {}
+  private apiUrl = 'http://localhost:8080/api/usuarios'; // Base URL do backend
 
-  login(name: string, password: string) {
+  constructor(private httpClient: HttpClient ) {}
+
+  login(request: LoginRequest, password: any) { // Alterar para receber LoginRequest
     return this.httpClient
-      .post<LoginResponse>("/login", { name, password })
+      .post<LoginResponse>(`${this.apiUrl}/login`, request ) // Usar a URL completa e o objeto request
       .pipe(
         tap((value) => {
           sessionStorage.setItem("auth-token", value.token);

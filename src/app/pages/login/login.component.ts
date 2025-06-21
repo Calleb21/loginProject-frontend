@@ -12,10 +12,11 @@ import { PrimaryInputComponent } from "../../components/primary-input/primary-in
 import { Router } from "@angular/router";
 import { LoginService } from "../../services/login.service";
 import { ToastrService } from "ngx-toastr";
+import { LoginRequest } from "../../models/login-request.model"; // Importar a nova interface
 
 interface LoginForm {
-  email: FormControl;
-  password: FormControl;
+  email: FormControl<string | null>;
+  password: FormControl<string | null>;
 }
 
 @Component({
@@ -42,20 +43,24 @@ export class LoginComponent {
       email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [
         Validators.required,
-        this.customPasswordValidator(),
+        // Remover a validação customizada de senha aqui, pois ela será feita no backend
       ]),
     });
   }
 
   submit() {
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.loginService.login(email, password).subscribe({
+      const request: LoginRequest = { // Criar um objeto LoginRequest
+        email: this.loginForm.value.email || '',
+        senha: this.loginForm.value.password || ''
+      };
+
+      this.loginService.login(request, request.senha).subscribe({
         next: () => this.toastService.success("Login feito com sucesso!"),
-        error: () =>
-          this.toastService.error(
-            "Erro inesperado! Tente novamente mais tarde"
-          ),
+        error: (err) => {
+          console.error(err);
+          this.toastService.error("Erro inesperado! Tente novamente mais tarde");
+        },
       });
     }
   }
@@ -64,33 +69,14 @@ export class LoginComponent {
     this.router.navigate(["signup"]);
   }
 
-  private customPasswordValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const password = control.value;
-
-      if (password.length < 11 || password.length > 15) {
-        return {
-          passwordLength: "Password must be between 11 and 15 characters long",
-        };
-      }
-      if (!/[A-Z]/.test(password)) {
-        return {
-          uppercaseLetter:
-            "Password must contain at least one uppercase letter",
-        };
-      }
-      if (!/[0-9]/.test(password)) {
-        return { number: "Password must contain at least one number" };
-      }
-      if (!/[!@#$%^&*]/.test(password)) {
-        return {
-          specialCharacter:
-            "Password must contain at least one special character",
-        };
-      }
-      return null; // Password is valid
-    };
-  }
+  // O método customPasswordValidator pode ser removido se não for mais usado em outro lugar
+  // private customPasswordValidator(): ValidatorFn {
+  //   return (control: AbstractControl): ValidationErrors | null => {
+  //     const password = control.value;
+  //     // ... lógica de validação ...
+  //     return null; // Password is valid
+  //   };
+  // }
 }
 
-type ValidatorFn = (control: AbstractControl) => ValidationErrors | null;
+// type ValidatorFn = (control: AbstractControl) => ValidationErrors | null;
