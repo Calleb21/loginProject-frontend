@@ -15,10 +15,10 @@ import { LoginService } from "../../services/login.service";
 import { ToastrService } from "ngx-toastr";
 
 interface SignupForm {
-  name: FormControl;
-  email: FormControl;
-  password: FormControl;
-  passwordConfirm: FormControl;
+  name: FormControl<string | null>;
+  email: FormControl<string | null>;
+  password: FormControl<string | null>;
+  passwordConfirm: FormControl<string | null>;
 }
 
 @Component({
@@ -63,13 +63,22 @@ export class SignupComponent {
 
   submit() {
     if (this.signupForm.valid) {
-      const { email, password } = this.signupForm.value;
-      this.loginService.login(email, password).subscribe({
-        next: () => this.toastService.success("Usuário criado com sucesso!"),
-        error: () =>
-          this.toastService.error(
-            "Erro inesperado! Tente novamente mais tarde"
-          ),
+      const request = {
+        nomeCompleto: this.signupForm.value.name || '',
+        email: this.signupForm.value.email || '',
+        senha: this.signupForm.value.password || '',
+        confirmacaoSenha: this.signupForm.value.passwordConfirm || ''
+      };
+
+      this.loginService.signup(request).subscribe({
+        next: () => {
+          this.toastService.success("Usuário criado com sucesso!");
+          this.router.navigate(["login"]);
+        },
+        error: (err) => {
+          console.error(err);
+          this.toastService.error("Erro ao criar usuário. Tente novamente.");
+        },
       });
     } else {
       this.toastService.error("Por favor, corrija os erros no formulário.");
@@ -82,7 +91,7 @@ export class SignupComponent {
 
   private customPasswordValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const password = control.value;
+      const password = control.value ?? "";
 
       if (password.length < 11 || password.length > 15) {
         return {
@@ -104,11 +113,10 @@ export class SignupComponent {
             "Password must contain at least one special character",
         };
       }
-      return null; // Password is valid
+      return null;
     };
   }
 
-  // Validator to check if password and confirm password match
   private passwordMatchValidator(): ValidatorFn {
     return (formGroup: AbstractControl): ValidationErrors | null => {
       const password = formGroup.get("password")?.value;
