@@ -55,11 +55,13 @@ export class LoginComponent {
         senha: this.loginForm.value.password || ''
       };
 
-      this.loginService.login(request, request.senha).subscribe({
+      // AQUI ESTÁ A CORREÇÃO: Passando apenas 'request' para o método login
+      this.loginService.login(request).subscribe({
         next: () => this.toastService.success("Login feito com sucesso!"),
-        error: (err) => {
+        error: (err: Error) => { // Tipar 'err' como Error
           console.error(err);
-          this.toastService.error("Erro inesperado! Tente novamente mais tarde");
+          const errorMessage = err.message || "Erro inesperado! Tente novamente mais tarde";
+          this.toastService.error(errorMessage);
         },
       });
     }
@@ -78,5 +80,3 @@ export class LoginComponent {
   //   };
   // }
 }
-
-// type ValidatorFn = (control: AbstractControl) => ValidationErrors | null;

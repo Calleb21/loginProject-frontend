@@ -1,9 +1,10 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { LoginResponse } from "../types/login-response.type";
 import { LoginRequest } from "../models/login-request.model";
-import { SignupRequest } from "../models/signup-request.model";
-import { tap } from "rxjs";
+import { ResetPasswordRequest } from "../models/resetPassword-request.model";
+import { Observable, throwError } from "rxjs";
+import { catchError, tap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root",
@@ -13,14 +14,30 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) {}
 
-  login(request: LoginRequest, password: any) {
+  login(request: LoginRequest): Observable<LoginResponse> {
     return this.httpClient
-      .post<LoginResponse>(`${this.apiUrl}/login`, request)
+      .post(`${this.apiUrl}/login`, request, { responseType: 'text' })
       .pipe(
+        map((response: string) => {
+          try {
+            const jsonResponse = JSON.parse(response);
+            if (jsonResponse && jsonResponse.token && jsonResponse.name) {
+              return jsonResponse as LoginResponse;
+            }
+            throw new Error('Formato de resposta de login inesperado.');
+          } catch (e: unknown) {
+            let errorMessage = 'Erro ao parsear resposta de login.';
+            if (e instanceof Error) {
+              errorMessage += ': ' + e.message;
+            }
+            throw new Error(errorMessage);
+          }
+        }),
         tap((value) => {
           sessionStorage.setItem("auth-token", value.token);
           sessionStorage.setItem("username", value.name);
-        })
+        }),
+        catchError(this.handleError)
       );
   }
 
@@ -29,7 +46,37 @@ export class LoginService {
     email: string;
     senha: string;
     confirmacaoSenha: string;
-  }) {
-    return this.httpClient.post(`${this.apiUrl}/signup`, data);
+  }): Observable<any> {
+    // AQUI ESTÁ O AJUSTE PARA O SIGNUP: Definindo responseType: 'text'
+    // Isso garante que o HttpClient não tente parsear o corpo de erro como JSON.
+    return this.httpClient.post(`${this.apiUrl}/signup`, data, { responseType: 'text' })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  resetPassword(request: ResetPasswordRequest): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/resetPassword`, request, { responseType: 'text' })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'Ocorreu um erro desconhecido!';
+
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Erro de Rede: ${error.error.message}`;
+    } else {
+      if (typeof error.error === 'string') {
+        errorMessage = error.error;
+      } else if (error.error && typeof error.error === 'object' && error.error.message) {
+        errorMessage = error.error.message;
+      } else {
+        errorMessage = `Erro do Servidor (Status: ${error.status}): ${error.statusText || 'Erro desconhecido'}`;
+      }
+    }
+    console.error("Erro no serviço:", errorMessage, error);
+    return throwError(() => new Error(errorMessage));
   }
 }

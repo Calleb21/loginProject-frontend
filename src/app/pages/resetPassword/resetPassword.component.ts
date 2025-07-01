@@ -13,12 +13,13 @@ import { PrimaryInputComponent } from "../../components/primary-input/primary-in
 import { Router } from "@angular/router";
 import { LoginService } from "../../services/login.service";
 import { ToastrService } from "ngx-toastr";
+import { ResetPasswordRequest } from "../../models/resetPassword-request.model"; // Importar a nova interface
 
 interface ResetPasswordForm {
-  name: FormControl;
-  email: FormControl;
-  password: FormControl;
-  passwordConfirm: FormControl;
+  name: FormControl<string | null>;
+  email: FormControl<string | null>;
+  password: FormControl<string | null>;
+  passwordConfirm: FormControl<string | null>;
 }
 
 @Component({
@@ -34,7 +35,7 @@ interface ResetPasswordForm {
   styleUrls: ["./resetPassword.component.scss"],
 })
 export class ResetPasswordComponent {
-  resetPasswordForm!: FormGroup<ResetPasswordForm>; // Renomeado de signupForm para resetPasswordForm
+  resetPasswordForm!: FormGroup<ResetPasswordForm>;
 
   constructor(
     private router: Router,
@@ -61,16 +62,27 @@ export class ResetPasswordComponent {
     );
   }
 
-  // Método submit permanece o mesmo
   submit() {
     if (this.resetPasswordForm.valid) {
-      const { email, password } = this.resetPasswordForm.value;
-      this.loginService.login(email, password).subscribe({
-        next: () => this.toastService.success("Usuário criado com sucesso!"),
-        error: () =>
-          this.toastService.error(
-            "Erro inesperado! Tente novamente mais tarde"
-          ),
+      const request: ResetPasswordRequest = {
+        nomeCompleto: this.resetPasswordForm.value.name || "",
+        email: this.resetPasswordForm.value.email || "",
+        senha: this.resetPasswordForm.value.password || "",
+        confirmacaoSenha: this.resetPasswordForm.value.passwordConfirm || "",
+      };
+
+      this.loginService.resetPassword(request).subscribe({
+        next: () => this.toastService.success("Senha alterada com sucesso!"),
+        error: (err) => {
+          console.error(err);
+          // AQUI ESTÁ O AJUSTE PRINCIPAL:
+          // O objeto 'err' retornado pelo HttpClient contém a propriedade 'error',
+          // que é o corpo da resposta do backend.
+          // Se o backend enviou uma string de erro (como "A nova senha não pode ser igual à senha anterior"),
+          // ela estará em err.error.
+          const errorMessage = err.error || "Erro ao alterar senha! Tente novamente mais tarde";
+          this.toastService.error(errorMessage);
+        },
       });
     } else {
       this.toastService.error("Por favor, corrija os erros no formulário.");
