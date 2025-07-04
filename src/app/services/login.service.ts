@@ -55,28 +55,28 @@ export class LoginService {
       );
   }
 
-  resetPassword(request: ResetPasswordRequest): Observable<any> {
-    return this.httpClient.post(`${this.apiUrl}/resetPassword`, request, { responseType: 'text' })
-      .pipe(
-        catchError(this.handleError)
-      );
+  resetPassword(request: ResetPasswordRequest): Observable<void> {
+    // CORREÇÃO MANTIDA: O backend retorna um corpo vazio (void) em caso de sucesso.
+    return this.httpClient.post<void>(`${this.apiUrl}/resetPassword`, request).pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Ocorreu um erro desconhecido!';
 
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Erro de Rede: ${error.error.message}`;
-    } else {
-      if (typeof error.error === 'string') {
+    // CORREÇÃO MANTIDA: Lógica simplificada para tratar os erros do backend.
+    if (error.status === 0) {
+      errorMessage = 'Não foi possível conectar ao servidor. Verifique sua rede.';
+    } else if (error.error) {
+      if (error.error.erros && Array.isArray(error.error.erros)) {
+        errorMessage = error.error.erros.join('\n');
+      } else if (typeof error.error === 'string') {
         errorMessage = error.error;
-      } else if (error.error && typeof error.error === 'object' && error.error.message) {
-        errorMessage = error.error.message;
-      } else {
-        errorMessage = `Erro do Servidor (Status: ${error.status}): ${error.statusText || 'Erro desconhecido'}`;
       }
     }
-    console.error("Erro no serviço:", errorMessage, error);
+
+    console.error("Erro na API:", errorMessage, error);
     return throwError(() => new Error(errorMessage));
   }
 }

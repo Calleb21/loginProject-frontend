@@ -67,19 +67,14 @@ export class ResetPasswordComponent {
       const request: ResetPasswordRequest = {
         nomeCompleto: this.resetPasswordForm.value.name || "",
         email: this.resetPasswordForm.value.email || "",
-        senha: this.resetPasswordForm.value.password || "",
-        confirmacaoSenha: this.resetPasswordForm.value.passwordConfirm || "",
+        novaSenha: this.resetPasswordForm.value.password || "",
+        confirmacaoNovaSenha: this.resetPasswordForm.value.passwordConfirm || "",
       };
 
       this.loginService.resetPassword(request).subscribe({
         next: () => this.toastService.success("Senha alterada com sucesso!"),
         error: (err) => {
           console.error(err);
-          // AQUI ESTÁ O AJUSTE PRINCIPAL:
-          // O objeto 'err' retornado pelo HttpClient contém a propriedade 'error',
-          // que é o corpo da resposta do backend.
-          // Se o backend enviou uma string de erro (como "A nova senha não pode ser igual à senha anterior"),
-          // ela estará em err.error.
           const errorMessage = err.error || "Erro ao alterar senha! Tente novamente mais tarde";
           this.toastService.error(errorMessage);
         },
