@@ -75,9 +75,8 @@ export class SignupComponent {
           this.toastService.success("Usuário criado com sucesso!");
           this.router.navigate(["login"]);
         },
-        error: (err: Error) => { // AQUI ESTÁ O AJUSTE: Tipar 'err' como Error
+        error: (err: Error) => { 
           console.error(err);
-          // A mensagem de erro deve estar em err.message devido ao tratamento no LoginService
           const errorMessage = err.message || "Erro ao criar usuário. Tente novamente.";
           this.toastService.error(errorMessage);
         },

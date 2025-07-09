@@ -10,7 +10,7 @@ import { catchError, tap, map } from 'rxjs/operators';
   providedIn: "root",
 })
 export class LoginService {
-  private apiUrl = "http://localhost:8080/api/usuarios"; // Base URL do backend
+  private apiUrl = "http://localhost:8080/api/usuarios"; 
 
   constructor(private httpClient: HttpClient) {}
 
@@ -47,8 +47,6 @@ export class LoginService {
     senha: string;
     confirmacaoSenha: string;
   }): Observable<any> {
-    // AQUI ESTÁ O AJUSTE PARA O SIGNUP: Definindo responseType: 'text'
-    // Isso garante que o HttpClient não tente parsear o corpo de erro como JSON.
     return this.httpClient.post(`${this.apiUrl}/signup`, data, { responseType: 'text' })
       .pipe(
         catchError(this.handleError)
@@ -56,7 +54,6 @@ export class LoginService {
   }
 
   resetPassword(request: ResetPasswordRequest): Observable<void> {
-    // CORREÇÃO MANTIDA: O backend retorna um corpo vazio (void) em caso de sucesso.
     return this.httpClient.post<void>(`${this.apiUrl}/resetPassword`, request).pipe(
       catchError(this.handleError)
     );
@@ -65,7 +62,6 @@ export class LoginService {
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Ocorreu um erro desconhecido!';
 
-    // CORREÇÃO MANTIDA: Lógica simplificada para tratar os erros do backend.
     if (error.status === 0) {
       errorMessage = 'Não foi possível conectar ao servidor. Verifique sua rede.';
     } else if (error.error) {

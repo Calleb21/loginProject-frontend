@@ -13,7 +13,7 @@ import { PrimaryInputComponent } from "../../components/primary-input/primary-in
 import { Router } from "@angular/router";
 import { LoginService } from "../../services/login.service";
 import { ToastrService } from "ngx-toastr";
-import { ResetPasswordRequest } from "../../models/resetPassword-request.model"; // Importar a nova interface
+import { ResetPasswordRequest } from "../../models/resetPassword-request.model";
 
 interface ResetPasswordForm {
   name: FormControl<string | null>;
