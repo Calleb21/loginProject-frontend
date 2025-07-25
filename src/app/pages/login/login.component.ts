@@ -49,6 +49,7 @@ export class LoginComponent {
       return;
     }
 
+    // A criação do 'request' está correta
     const request: LoginRequest = {
       email: this.loginForm.value.email || '',
       senha: this.loginForm.value.password || ''
@@ -57,7 +58,10 @@ export class LoginComponent {
     this.loginService.login(request).subscribe({
       next: () => {
         this.toastService.success("Login feito com sucesso!");
-        window.location.href = "https://github.com";
+        
+        // CORREÇÃO: Adicione esta linha para redirecionar o usuário
+        // Use a rota da sua página principal pós-login. '/home' é um exemplo.
+        this.router.navigate(['/home']);
       },
       error: (err: Error) => {
         this.toastService.error(err.message);
@@ -66,6 +70,6 @@ export class LoginComponent {
   }
 
   navigate() {
-    window.location.href = "https://github.com/signup";
+    this.router.navigate(["signup"]);
   }
 }
